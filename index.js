@@ -33,6 +33,22 @@ app.get('/productos/:id', async function(req, res){
 })
 app.post('/productos', async function(req, res){
 
+    const nombre = req.body.nombre
+    const precio = req.body.precio
+    const categoria = req.body.categoria
+    
+    if(!nombre || !precio || !categoria){
+       res.json('El nombre, el precio y la categoria son obligatorios')
+    }else{
+       const nuevoProducto = {
+           id: productos.length+1,
+           nombre: nombre,
+           precio: precio,
+           categoria: categoria,
+           stock:  req.body.stock,
+       }
+       productos.push(nuevoProducto)
+    }
 })
 app.put('/productos/:id', async function(req, res){
 
