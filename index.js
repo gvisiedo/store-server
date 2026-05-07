@@ -52,7 +52,22 @@ app.post('/productos', async function(req, res){
     }
 })
 app.put('/productos/:id', async function(req, res){
-
+    const id = req.params.id
+    const indice = productos.findIndex(p=>p.id === Number(id))
+    if(indice === -1){
+        res.status(404).json({error: 'Producto no encontrado'})
+        return
+    }else{
+        const actProducto ={
+            id: productos[indice].id,
+            nombre: req.body.nombre,
+            precio: req.body.precio,
+            categoria: req.body.categoria,
+            stock: req.body.stock
+        }
+        productos[indice]=actProducto
+    }
+    res.status(200).json({mensaje: 'Producto actualizado'})
 })
 app.delete('/productos/:id', async function(req, res){
 
