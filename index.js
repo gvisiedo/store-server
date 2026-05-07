@@ -37,7 +37,7 @@ app.post('/productos', async function(req, res){
     const precio = req.body.precio
     const categoria = req.body.categoria
     
-    if(!nombre || !precio || !categoria){
+    if(!nombre || !precio || !categoria || Number(precio)<=0){
        res.json('El nombre, el precio y la categoria son obligatorios')
     }else{
        const nuevoProducto = {
@@ -45,9 +45,10 @@ app.post('/productos', async function(req, res){
            nombre: nombre,
            precio: precio,
            categoria: categoria,
-           stock:  req.body.stock,
+           stock:  req.body.stock || 0,
        }
        productos.push(nuevoProducto)
+       res.json(nuevoProducto)
     }
 })
 app.put('/productos/:id', async function(req, res){
