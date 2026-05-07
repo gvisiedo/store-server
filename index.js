@@ -70,7 +70,14 @@ app.put('/productos/:id', async function(req, res){
     res.status(200).json({mensaje: 'Producto actualizado'})
 })
 app.delete('/productos/:id', async function(req, res){
-
+    const id = req.params.id
+    const indice = productos.findIndex(p=>p.id === Number(id))
+    if(indice === -1){
+        res.status(404).json({error: 'Producto no encontrado'})
+        return
+    }
+    productos.splice(indice, 1)
+    res.json({mensaje: 'Producto eliminado'})
 })
 
 app.listen(3000, function(){
