@@ -84,7 +84,3 @@ app.listen(3000, function(){
     console.log('Servidor corriendo en http://localhost:3000')
 })
 
-const stock = req.params.stock
-if(producto.stock === Number(0)){
-        res.status(404).json({error: 'Este producto no tiene stock'})
-        return}
